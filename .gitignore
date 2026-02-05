@@ -1,6 +1,6 @@
 .venv/
 .env
-*.sqlite
+*.sqlite3
 **/__pycache__/
 *.pyc
 *.pyo
