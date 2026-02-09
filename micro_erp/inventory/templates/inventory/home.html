@@ -1,6 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hello there</h1>
+    {% include "includes/navbar.html" %}
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-md-4">
+                <c-card>
+                    <h5>Test Slot</h5>
+                </c-card>
+            </div>
+            <div class="col-md-8">
+                <c-card>
+                    <h5>Test Slot</h5>
+                </c-card>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <c-card>
+                    <h5>Test Slot</h5>
+                </c-card>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
 
