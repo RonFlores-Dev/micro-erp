@@ -48,13 +48,13 @@ class StockMovement(models.Model):
     movement_type = models.CharField(max_length=3, choices=MOVEMENT_TYPES)
 
     from_location = models.ForeignKey(
-        Location, on_delete=models.CASCADE, 
-        related_name='movement_out',
+        Location, on_delete=models.PROTECT, 
+        related_name='outbound_movement',
         null=True, blank=True
     )
     to_location = models.ForeignKey(
-        Location, on_delete=models.CASCADE,
-        related_name='movement_in',
+        Location, on_delete=models.PROTECT,
+        related_name='inbound_movement',
         null=True, blank=True
     )
 

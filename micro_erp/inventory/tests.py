@@ -1,6 +1,6 @@
 from django.test import TestCase
-from micro_erp.inventory.services import create_stock_movement
-from micro_erp.inventory.models import Location, Product, StockLevel
+from micro_erp.inventory.services import create_stock_movement, InsufficientStockError
+from micro_erp.inventory.models import Location, Product, StockLevel, StockMovement
 
 # Create your tests here.
 
@@ -60,4 +60,15 @@ class InventoryTestCase(TestCase):
 
         self.stock_b.refresh_from_db()
 
-        self.assertEqual(self.stock_b.quantity, 5) 
+        self.assertEqual(self.stock_b.quantity, 5)
+    
+    def test_insufficient_stock(self):
+        with self.assertRaises(InsufficientStockError):
+            create_stock_movement(
+                product=self.product_a,
+                quantity=15,
+                movement_type='OUT',
+                from_location=self.location_a
+            )
+        
+        self.assertEqual(StockMovement.objects.count(), 0)
