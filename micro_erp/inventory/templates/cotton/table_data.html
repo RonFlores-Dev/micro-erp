@@ -1,0 +1,16 @@
+<tr>
+    <td>{{ key }}</td>
+    <td>{{ product_name }}</td>
+    <td>{{ quantity }}</td>
+    <td>{{ movement_type }}</td>
+    <td>{{ from_location }}</td>
+    <td>{{ unit_price_at_purchase }}</td>
+    <td 
+        class="text-truncate"
+        style="max-width: 150px;" 
+        data-bs-toggle="tooltip" 
+        title="{{ reference }}">
+        {{ reference|default:"N/A" }}
+    </td>
+    <td>{{ timestamp }}</td>
+</tr>

@@ -18,7 +18,10 @@
         <div class="row mt-4">
             <div class="col-12">
                 <c-card>
-                    <h5>Test Slot</h5>
+                    <div id="pagination-container"></div>
+                    <c-table>
+                        <tbody id="stock-table-body" hx-get="{% url 'stock_movements' %}" hx-trigger="load"></tbody>
+                    </c-table>
                 </c-card>
             </div>
         </div>
