@@ -1,0 +1,19 @@
+{% for movement in stock_movements %}
+    <c-table_data
+        key="{{ movement.id }}"
+        product_name="{{ movement.product.name }}"
+        quantity="{{ movement.quantity }}"
+        movement_type="{{ movement.movement_type }}"
+        from_location="{{ movement.from_location.name|default:"N/A" }}"
+        unit_price_at_purchase="{{ movement.unit_price_at_purchase }}"
+        reference="{{ movement.reference|default:"N/A" }}"
+        timestamp="{{ movement.timestamp|date:"Y-m-d H:i" }}"
+    ></c-table_data>
+{% endfor %}
+
+<div id="pagination-container" hx-swap-oob="true">
+    <h2>{{ is_paginated }}</h2>
+    {% if is_paginated %}
+       <c-pagination :page_obj="page_obj" />
+    {% endif %}
+</div>
