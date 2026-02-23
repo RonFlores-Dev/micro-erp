@@ -5,7 +5,7 @@ from django.core.management import call_command
 class TestStockLevelJson(TestCase):
     def setUp(self):
         self.client = Client()
-        self.url = reverse('stock_level_json', args=[1])
+        self.url = reverse('stock_level', args=[1])
         
         call_command('seed_inventory')
 
