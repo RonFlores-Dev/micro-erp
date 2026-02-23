@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
-from django.views.generic import TemplateView, ListView
-from micro_erp.inventory.models import StockMovement
+from django.http import JsonResponse
+from django.views.generic import TemplateView, ListView, View
+from micro_erp.inventory.models import StockMovement, StockLevel
 
 # Create your views here.
 
@@ -22,3 +23,15 @@ class StockMovementListView(HTMXRequiredMixin, ListView):
 
     def get_queryset(self):
         return StockMovement.objects.all().order_by('-timestamp')
+    
+class StockLevelJsonView(View):
+    def get(self, request, *args, **kwargs):
+        location_id = self.kwargs['location_id']
+        stock_level = StockLevel.objects.filter(location_id=location_id)
+
+        data = {
+            'labels': [stock_level.product.name for stock_level in stock_level],
+            'data': [stock_level.quantity for stock_level in stock_level]
+        }
+
+        return JsonResponse(data, safe=False)
