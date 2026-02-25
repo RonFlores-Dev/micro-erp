@@ -4,7 +4,7 @@ from django.urls import reverse
 class TestInventoryViews(TestCase):
     def setUp(self):
         self.client = Client()
-        self.url = reverse('stock_movements')
+        self.url = reverse('stock_movements', args=[1])
         self.home_url = reverse('home')
 
     def test_non_htmx_request_redirects(self):
