@@ -4,7 +4,7 @@
     {% include "includes/navbar.html" %}
     <div 
         class="container"
-        x-data="renderBarChart('{% url 'stock_level' 1 %}')">
+        x-data="renderBarChart('{% url 'stock_level' location_id %}')">
         
         <div class="row gy-4">
             <div class="col-md-4">
@@ -25,7 +25,7 @@
                 <c-card>
                     <div id="pagination-container"></div>
                     <c-table>
-                        <tbody id="stock-table-body" hx-get="{% url 'stock_movements' %}" hx-trigger="load"></tbody>
+                        <tbody id="stock-table-body" hx-get="{% url 'stock_movements' location_id %}" hx-trigger="load"></tbody>
                     </c-table>
                 </c-card>
             </div>

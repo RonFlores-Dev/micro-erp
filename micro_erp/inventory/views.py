@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.db.models import Q
 from django.http import JsonResponse
 from django.views.generic import TemplateView, ListView, View
 from micro_erp.inventory.models import StockMovement, StockLevel
@@ -15,6 +16,14 @@ class HTMXRequiredMixin:
 class HomeView(TemplateView):
     template_name = 'inventory/home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        location_id = self.kwargs['location_id']
+
+        context['location_id'] = location_id
+
+        return context
+
 class StockMovementListView(HTMXRequiredMixin, ListView):
     model = StockMovement
     context_object_name = 'stock_movements'
@@ -22,7 +31,9 @@ class StockMovementListView(HTMXRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return StockMovement.objects.all().order_by('-timestamp')
+        return StockMovement.objects.filter(
+            Q(from_location_id=self.kwargs['location_id']) | Q(to_location_id=self.kwargs['location_id'])
+        ).order_by('-timestamp')
     
 class StockLevelJsonView(View):
     def get(self, request, *args, **kwargs):
