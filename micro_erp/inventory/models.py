@@ -82,6 +82,14 @@ class StockMovement(models.Model):
             
         if self.movement_type == 'OUT' and not self.from_location:
             raise ValidationError("Outbound movements require a source location.")
+        
+    def flow_description(self):
+        if self.movement_type == 'TR':
+            return f"{self.from_location.name} -> {self.to_location.name}"
+        elif self.movement_type == 'IN':
+            return "From supplier"
+        elif self.movement_type == 'OUT':
+            return "To customer"
 
     @property
     def total_cost(self):
