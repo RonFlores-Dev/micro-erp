@@ -33,6 +33,9 @@ class StockMovementListView(HTMXRequiredMixin, ListView):
     def get_queryset(self):
         return StockMovement.objects.filter(
             Q(from_location_id=self.kwargs['location_id']) | Q(to_location_id=self.kwargs['location_id'])
+        ).select_related(
+            'from_location',
+            'to_location'
         ).order_by('-timestamp')
     
 class StockLevelJsonView(View):

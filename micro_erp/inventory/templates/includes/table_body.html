@@ -4,8 +4,8 @@
         product_name="{{ movement.product.name }}"
         quantity="{{ movement.quantity }}"
         movement_type="{{ movement.movement_type }}"
-        from_location="{{ movement.from_location.name|default:"N/A" }}"
-        unit_price_at_purchase="{{ movement.unit_price_at_purchase }}"
+        flow="{{ movement.flow_description }}"
+        unit_price_at_purchase="{{ movement.unit_price_at_purchase|default:"-" }}"
         reference="{{ movement.reference|default:"N/A" }}"
         timestamp="{{ movement.timestamp|date:"Y-m-d H:i" }}"
     ></c-table_data>
